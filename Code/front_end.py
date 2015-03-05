@@ -77,7 +77,6 @@ def try_replica_server(data):
 
 	#Send all responses to client
 	print (str(data.decode('utf-8')))
-	print ('Len: ' + str(len(serverResponse)))
 	print (str(serverResponse))
 	if (data.decode('utf-8')[:3]=='GET'): #Was movie info requested?
 		print ('Request was ' + str(data.decode('utf-8')[:3]))
@@ -113,6 +112,12 @@ def query_omdb(name):
 	except:
 		print ('> No movie information found online')
 		return ('ERR')
+
+# Process movie information responses
+#def process_responses(serverResponse):
+
+
 # Propagate web query results to replicas
+#def propagate_movie_information
 
 start_fe_server()
