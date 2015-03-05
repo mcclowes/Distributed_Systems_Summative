@@ -25,5 +25,5 @@ pickle.dump( fe_server_db, open( "fe_server_db.p", "wb" ) )
 fe_port_db = [['localhost',11000],['localhost',11001],['localhost',11002]]
 pickle.dump( fe_port_db, open( "fe_port_db.p", "wb" ) )
 
-replica_port_db = [['localhost',12000],['localhost',12001],['localhost',12002],['localhost',11003],['localhost',11004],['localhost',12000],['locahost',12001]]
+replica_port_db = [['localhost',12000],['localhost',12001],['localhost',12002],['localhost',12003],['localhost',12004]]
 pickle.dump( replica_port_db, open( "replica_port_db.p", "wb" ) )
