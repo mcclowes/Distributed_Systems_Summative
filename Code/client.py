@@ -90,7 +90,7 @@ def edit_movie_info():
     movieName = ((input('\nName:\n')).lower()).capitalize()
     movieUrl = (input('\nURL:\n')).title()
     movieDesc = ((input('\nDescription:\n')).lower()).capitalize()
-    data = ('_'.join('CLIENT', 'EDI', movieName, movieUrl, movieDesc)).encode()
+    data = ('_'.join(['CLIENT', 'EDI', movieName, movieUrl, movieDesc])).encode()
     movieData = (try_server(data)).split('_')
     for item in movieData:
         if item=='ERR':
@@ -100,10 +100,10 @@ def edit_movie_info():
 
 #Add a new movie
 def add_movie_info():
-    movieName = ((input('\nName:\n')).lower()).capitalize()
+    movieName = ((input('\nName:\n')).lower()).title()
     movieUrl = (input('\nURL:\n')).title()
     movieDesc = ((input('\nDescription:\n')).lower()).capitalize()
-    data = ('_'.join('CLIENT', 'ADD', movieName, movieUrl, movieDesc)).encode()
+    data = ('_'.join(['CLIENT', 'ADD', movieName, movieUrl, movieDesc])).encode()
     movieData = try_server(data)
     for item in movieData:
         if item=='ERR':
@@ -114,7 +114,7 @@ def add_movie_info():
 #Gets a list of all movies
 def get_movies():
     data = ('CLIENT_ALL').encode()
-    movieData = try_server(data)
+    movieData = try_server(data)[0].split('_')
     for item in movieData:
         print (item)
 
