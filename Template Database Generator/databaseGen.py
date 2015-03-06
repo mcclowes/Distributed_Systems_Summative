@@ -30,15 +30,20 @@ moviedb = [['Moneyball', 'www.moneyball.com', 'Not a movie about the lottery, su
            ['Month Python and the Holy Grail','www.monty.co.uk','Python']]
 for i in range(len(moviedb)):
   moviedb[i][1] = find_url(moviedb[i][0])
-print (moviedb)
 pickle.dump( moviedb, open( "movie_db.p", "wb" ) )
 
-#Generate database of 
+#Generate database of valid locations for the fe server
 fe_server_db = [['localhost',11000],['localhost',11001],['localhost',11002]]
 pickle.dump( fe_server_db, open( "fe_server_db.p", "wb" ) )
 
+#Generate database of valid locations to find fe server at
 fe_port_db = [['localhost',11000],['localhost',11001],['localhost',11002]]
 pickle.dump( fe_port_db, open( "fe_port_db.p", "wb" ) )
 
-replica_port_db = [['localhost',12000],['localhost',12001],['localhost',12002],['localhost',12003],['localhost',12004]]
-pickle.dump( replica_port_db, open( "replica_port_db.p", "wb" ) )
+#Generate database of valid locations to find backend servers at
+active_server_db = []
+pickle.dump( active_server_db, open( "active_server_db.p", "wb" ) )
+
+#Generate database of active servers
+be_server_db = [['localhost',12000],['localhost',12001],['localhost',12002],['localhost',12003],['localhost',12004]]
+pickle.dump( be_server_db, open( "be_server_db.p", "wb" ) )

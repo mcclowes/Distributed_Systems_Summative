@@ -6,6 +6,8 @@ from socket import *
 import pickle
 import sys
 from threading import *
+import urllib.request
+import json
 
 #Contains array of valid ports for replica server
 serverdb = pickle.load( open('replica_port_db.p','rb'))
@@ -107,6 +109,17 @@ def send_database(data,socket):
             movieInfo.append(moviedb[i][0])
       socket.send(('_'.join(movieInfo)).encode())
       return
+
+#If all responses were errors (i.e. no movie info currently), retrieve
+def query_omdb(name):
+      name = name.replace(' ', '+').lower()
+      omdbURL = str('http://www.omdbapi.com/?s=' + name + '&r=json')
+      movieInfo = json.loads(urllib.request.urlopen(omdbURL).read().decode('utf-8'))
+      try:
+            return ((movieInfo['Search'][0]['Title']) + "_http://www.imdb.com/title/" + (movieInfo['Search'][0]['imdbID']) + "_" + (movieInfo['Search'][0]['Title']) + ' was released in ' + (movieInfo['Search'][0]['Year']))
+      except:
+            print ('> No movie information found online')
+            return ('ERR')
 
 methodList = {"GET":send_movie_info, "EDI":edit_movie_info, "ADD":add_movie_info,\
               "ALL":send_database}

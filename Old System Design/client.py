@@ -54,7 +54,7 @@ def try_server(data):
                 try:
                     clientSocket.send(data)
                 except:
-                    print('\n> Request tried and failed.\n')
+                    print('\nError 1.\n')
                     continue
                 feResponse.extend(((clientSocket.recv(1024)).decode('utf-8')).split('>'))
         except:
@@ -63,7 +63,7 @@ def try_server(data):
 
 #Create socket
 def create_socket(name,port):
-    print ('\nConnecting to Server: '+ str(name)+', Port: '+ str(port))
+    print ('Connecting to Server: '+ str(name)+', Port: '+ str(port))
     clientSocket = socket(AF_INET, SOCK_STREAM)
     try:
         clientSocket.connect((name,port))
@@ -75,8 +75,8 @@ def create_socket(name,port):
 #Retrieve information about a movie
 def get_movie_info():
     name = input('\nRequested movie name:\n')
-    name = (name.lower()).title()
-    data = ("CLIENT_GET_"+name).encode()
+    name = (name.lower()).capitalize()
+    data = ("GET_"+name).encode()
     movieData = try_server(data)
     for item in movieData:
         if item=='ERR':
@@ -88,9 +88,9 @@ def get_movie_info():
 #Edit a movie's saved information
 def edit_movie_info():
     movieName = ((input('\nName:\n')).lower()).capitalize()
-    movieUrl = (input('\nURL:\n')).title()
+    movieUrl = (input('\nURL:\n')).lower()
     movieDesc = ((input('\nDescription:\n')).lower()).capitalize()
-    data = ('_'.join('CLIENT', 'EDI', movieName, movieUrl, movieDesc)).encode()
+    data = ('_'.join('EDI', movieName, movieUrl, movieDesc)).encode()
     movieData = (try_server(data)).split('_')
     for item in movieData:
         if item=='ERR':
@@ -101,9 +101,9 @@ def edit_movie_info():
 #Add a new movie
 def add_movie_info():
     movieName = ((input('\nName:\n')).lower()).capitalize()
-    movieUrl = (input('\nURL:\n')).title()
+    movieUrl = (input('\nURL:\n')).lower()
     movieDesc = ((input('\nDescription:\n')).lower()).capitalize()
-    data = ('_'.join('CLIENT', 'ADD', movieName, movieUrl, movieDesc)).encode()
+    data = ('_'.join('ADD', movieName, movieUrl, movieDesc)).encode()
     movieData = try_server(data)
     for item in movieData:
         if item=='ERR':
@@ -113,7 +113,7 @@ def add_movie_info():
 
 #Gets a list of all movies
 def get_movies():
-    data = ('CLIENT_ALL').encode()
+    data = ('ALL').encode()
     movieData = try_server(data)
     for item in movieData:
         print (item)
