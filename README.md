@@ -1,4 +1,4 @@
-#TCP-Networking-Assignment
+# distributed-system-experiment
 =========================
 
     TCP Server/Client Networking program in Python
